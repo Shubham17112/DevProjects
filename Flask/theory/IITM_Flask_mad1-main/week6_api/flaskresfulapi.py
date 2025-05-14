@@ -1,0 +1,44 @@
+#what is context?
+# context refres to the envireometn in which u r working  
+
+
+# what is app context?
+# app context u saying to the flask which app should u use to do something like for db.createall() u using app context
+'''
+with app.app_context():
+    db.creat_all()
+    
+'''
+'''
+app2 = Flas(__name__)
+this is secound app so how flask now htat u workign ur db shoudl commit with app1 or app2?
+for thi u will use
+with app2.app_context():
+    db.creat_all()
+
+'''
+
+from flask import Flask
+from flask_sqlalchemy import SQLAlchemy
+from flask_restapi import Api
+
+app = Flask(__name__)
+
+app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///test.db"
+
+db = SQLAlchemy(app)
+
+api= Api(app)
+
+
+
+
+
+
+if __name__ == "__main__":
+    
+    with app.app_context():
+        db.create_all()
+    
+        
+    app.run(debug=True)
