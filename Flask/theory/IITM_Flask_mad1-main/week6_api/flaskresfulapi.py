@@ -18,9 +18,9 @@ with app2.app_context():
 
 '''
 
-from flask import Flask
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
-from flask_restapi import Api
+from flask_restful import Api, Resource
 
 app = Flask(__name__)
 
@@ -31,10 +31,30 @@ db = SQLAlchemy(app)
 api= Api(app)
 
 
+class User(db.Model):
+    id = db.Column(db.Integer,primary_key = True)
+    name = db.Column(db.String(100))
+    email = db.Column(db.String(100))
 
 
-
-
+class UserResource(Resource):
+    def get(self,id):
+        pass
+    
+    def post(self,id):
+        data = request.get_json()
+        new_user = User(id=id,)
+        pass
+    
+    def delete(self,id):
+        pass
+    
+    def update(self,id):
+        pass
+    
+    
+    
+api.add_resource(UserResource,'/user/<id:int>')
 if __name__ == "__main__":
     
     with app.app_context():
